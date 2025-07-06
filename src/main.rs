@@ -5,8 +5,7 @@ use clap::Parser;
 use tracing_subscriber::EnvFilter;
 
 use crate::{
-    commands::interactive::InteractiveCommand, ssh_command::SshCommandState,
-    ssh_config::SshConfigServiceState, state::State, user_fuzzy_find::UserFuzzyFindState,
+    commands::interactive::InteractiveCommand, ssh_command::SshCommandState, state::State,
 };
 
 mod commands;
@@ -82,8 +81,6 @@ async fn main() -> anyhow::Result<()> {
             // Remember result
         }
     }
-
-    return Ok(());
 
     Ok(())
 }

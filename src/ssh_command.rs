@@ -1,5 +1,3 @@
-use std::process::Stdio;
-
 use anyhow::Context;
 
 use crate::{ssh_config::SshItem, state::State};

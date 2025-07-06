@@ -70,7 +70,7 @@ impl SshItems {
         self.items.values().collect()
     }
 
-    pub fn from_choice(&self, choice: &str) -> Option<&SshItem> {
+    pub fn get_choice(&self, choice: &str) -> Option<&SshItem> {
         self.items.get(choice)
     }
 }

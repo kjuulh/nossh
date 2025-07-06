@@ -1,4 +1,4 @@
-#[derive(Clone)]
+#[derive(Clone, Default)]
 pub struct State {}
 
 impl State {

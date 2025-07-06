@@ -36,7 +36,7 @@ impl UserFuzzyFind {
         let output = chosen_item.output();
 
         let chosen_ssh_item = items
-            .from_choice(&output) // Cow, str, String
+            .get_choice(&output) // Cow, str, String
             .expect("always find an ssh item from a choice");
         tracing::debug!("the user chose item: {chosen_ssh_item:#?}");
 
