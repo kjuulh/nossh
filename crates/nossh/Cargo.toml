@@ -1,8 +1,12 @@
 [package]
 name = "nossh"
-version = "0.1.0"
 edition = "2024"
-
+readme = "../../README.md"
+version.workspace = true
+license.workspace = true
+repository = "https://git.front.kjuulh.io/kjuulh/nossh"
+authors = ["kjuulh <contact@kasperhermansen.com>"]
+description = "A SSH endpoint finder and launcher with fuzzy history lookup and ⬢ `.ssh/config` reference."
 
 [dependencies]
 anyhow = "1.0.98"
