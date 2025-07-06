@@ -6,6 +6,9 @@ vars:
   service: "nossh"
   registry: kasperhermansen
 
+  rust:
+    publish: {}
+
 please:
   project:
     owner: kjuulh
@@ -15,4 +18,3 @@ please:
     api_url: "https://git.front.kjuulh.io"
   actions:
     rust:
-      publish: true
