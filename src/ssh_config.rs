@@ -44,25 +44,34 @@ impl SshConfigService {
 }
 
 #[derive(Debug, Clone)]
-pub struct SshItem {
-    host: String,
+pub enum SshItem {
+    Own(String),
+    Raw { contents: Vec<String> },
 }
 
 impl SshItem {
-    pub fn to_host(&self) -> &str {
-        &self.host
+    pub fn to_host(&self) -> Vec<&str> {
+        match self {
+            SshItem::Own(own) => vec![own],
+            SshItem::Raw { contents } => contents.iter().map(|c| c.as_str()).collect(),
+        }
     }
 }
 
 impl Display for SshItem {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_str(&self.host)
+        let host = match self {
+            SshItem::Own(o) => o.to_string(),
+            SshItem::Raw { contents } => contents.join(" "),
+        };
+
+        f.write_str(&host)
     }
 }
 
 #[derive(Debug)]
 pub struct SshItems {
-    items: BTreeMap<String, SshItem>,
+    pub items: BTreeMap<String, SshItem>,
 }
 
 impl SshItems {
@@ -73,13 +82,15 @@ impl SshItems {
     pub fn get_choice(&self, choice: &str) -> Option<&SshItem> {
         self.items.get(choice)
     }
+
+    pub fn append(&mut self, other: &mut SshItems) {
+        self.items.append(&mut other.items);
+    }
 }
 
 impl From<&str> for SshItem {
     fn from(value: &str) -> Self {
-        Self {
-            host: value.to_string(),
-        }
+        Self::Own(value.to_string())
     }
 }
 

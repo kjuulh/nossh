@@ -55,7 +55,7 @@ impl UserFuzzyFindState for State {
 }
 
 impl SkimItem for SshItem {
-    fn text(&self) -> std::borrow::Cow<str> {
+    fn text(&'_ self) -> std::borrow::Cow<'_, str> {
         format!("{self}").into()
     }
 }

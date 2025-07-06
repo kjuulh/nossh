@@ -5,12 +5,14 @@ use clap::Parser;
 use tracing_subscriber::EnvFilter;
 
 use crate::{
-    commands::interactive::InteractiveCommand, ssh_command::SshCommandState, state::State,
+    commands::interactive::InteractiveCommand, ssh_command::SshCommandState,
+    ssh_command_database::SshCommandDatabaseState, state::State,
 };
 
 mod commands;
 
 mod ssh_command;
+mod ssh_command_database;
 mod ssh_config;
 mod state;
 mod user_fuzzy_find;
@@ -72,13 +74,16 @@ async fn main() -> anyhow::Result<()> {
             cmd.execute(&state, &ssh_config_path).await?;
         }
         Subcommands::External(items) => {
+            let items_ref: Vec<&str> = items.iter().map(|i| i.as_str()).collect();
+
             // Send to ssh
             state
                 .ssh_command()
-                .start_ssh_session_from_raw(items.iter().map(|i| i.as_str()).collect())
+                .start_ssh_session_from_raw(&items_ref)
                 .await?;
 
             // Remember result
+            state.ssh_command_database().add_item(&items_ref).await?;
         }
     }
 

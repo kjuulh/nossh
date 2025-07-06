@@ -12,7 +12,7 @@ impl SshCommand {
 
         // ssh something
         let mut cmd = tokio::process::Command::new("ssh");
-        cmd.arg(host);
+        cmd.args(host);
 
         let mut process = cmd.spawn()?;
         let res = process.wait().await.context("ssh call failed");
@@ -23,7 +23,7 @@ impl SshCommand {
         Ok(())
     }
 
-    pub async fn start_ssh_session_from_raw(&self, raw: Vec<&str>) -> anyhow::Result<()> {
+    pub async fn start_ssh_session_from_raw(&self, raw: &[&str]) -> anyhow::Result<()> {
         let pretty_raw = raw.join(" ");
         tracing::info!("starting ssh session at: {}", pretty_raw);
 
