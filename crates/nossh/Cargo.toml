@@ -14,7 +14,7 @@ clap = { version = "4.5.40", features = ["derive", "env"] }
 dirs = "6.0.0"
 serde = { version = "1.0.219", features = ["derive"] }
 serde_json = { version = "1.0.140", features = ["preserve_order"] }
-skim = "0.20.2"
+skim = "1.0.0"
 tokio = { version = "1.46.1", features = ["full"] }
 tracing = { version = "0.1.41", features = ["log"] }
 tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
